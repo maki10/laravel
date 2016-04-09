@@ -10,10 +10,21 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+Route::group(['middleware' => 'start'], function(){
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/','UserController@index');
+Route::post('/','UserController@store');
+
 });
 
-Route::get('users', 'UsersController@index');
-Route::get('users/create', 'UsersController@create');
+Route::group(['middleware' => 'login'], function(){
+
+Route::get('items', 'ItemController@index');
+Route::get('items/{type}', 'ItemController@show');
+Route::get('card', 'CardController@index');
+Route::get('card/cash_out', 'CardController@buy');
+Route::get('basket/add/{id}', 'BasketController@add');
+Route::get('basket/delete/{id}', 'BasketController@delete');
+Route::get('logout', 'LogoutController@index');
+
+});

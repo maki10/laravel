@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UserTest extends Migration
+class AddToBasket extends Migration
 {
     /**
      * Run the migrations.
@@ -12,11 +12,13 @@ class UserTest extends Migration
      */
     public function up()
     {
-        Schema::create('user_test', function (Blueprint $table) {
-            $table->increments('id')->unique();
-            $table->string('email')->unique();
-            $table->string('nick')->unique();
-            $table->string('pass');
+        Schema::create('baskets', function (Blueprint $table) {
+            $table->integer('id');
+            $table->string('name');
+            $table->integer('price');
+            $table->string('type');
+            $table->integer('kol');
+            $table->integer('weight');
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class UserTest extends Migration
      */
     public function down()
     {
-        Schema::drop('user_test');
+        Schema::drop('baskets');
     }
 }
